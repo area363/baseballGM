@@ -1,11 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Premium Coffee Bean</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+
+    <!-- Boostrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous">
+
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mystyle.css') }}">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
+    
+
 </head>
+
 <body>
-    <h1>Hello World</h1>
+    <div class="coffee">
+        <img src="https://images.unsplash.com/photo-1515471897120-85416077e011?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"
+            alt="Coffee" style="width:300px; height:300px; border-radius: 10px; margin: auto;">
+    </div>
+
+    <!-- Product Name & Description -->
+    <div class="product">
+        <p>
+            <h1><strong>카페 납품 프리미엄 원두커피 (1kg)</strong></h1>
+        </p>
+        <p>
+            <h4>가격: 3만원/ 개</h4>
+        </p>
+        <hr>
+        <p>여태까지 이런 가성비는 없었다! 전세계적으로 유명한 S카페 브랜드에 직접 납품하는 컬럼비아 농장에서
+            직수입한 원두커피를 저렴한 가격에 판매합니다. 집 또는 사무실에서 프리미엄 원두커피의 향을 직접 느껴보세요.
+        </p>
+
+    </div>
+
+    <!-- Order Form -->
+    <div class="order">
+        <h1><strong>주문하기</strong></h1>
+
+        <hr>
+        <div class="form-group">
+            <label for="name">주문자 성함</label>
+            <input type="name" class="form-control" id="name">
+        </div>
+        <div class="form-group">
+            <label for="order">수량</label>
+            <select class="form-control" id="quantity">
+                <option>수량선택</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="address">주소</label>
+            <input type="address" class="form-control" id="address">
+        </div>
+        <div class="form-group">
+            <label for="tel">전화번호</label>
+            <input type="tel" class="form-control" id="telephone">
+        </div>
+        <button type="submit" class="btn btn-primary" id="button" onclick="order()">주문하기</button>
+        <br>
+        <div class="orders">
+            <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">이름</th>
+                <th scope="col">수량</th>
+                <th scope="col">주소</th>
+                <th scope="col">전화번호</th>
+              </tr>
+            </thead>
+            <tbody id="orders-box">
+              <tr>
+              </tr>
+              
+            </tbody>
+          </table>
+          </div>
+
+    </div>
 </body>
+
 </html>

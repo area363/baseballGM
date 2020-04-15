@@ -1,0 +1,27 @@
+body{
+    background-color: bisque;
+    font-family: 'Stylish', sans-serif;
+    margin: 25px;
+}
+
+.coffee {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.product {
+    margin: 50px;
+}
+
+.order{
+    margin: 50px;
+}
+
+.orders{
+
+    margin:25px 0px 0px 0px;
+}
