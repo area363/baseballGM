@@ -5,4 +5,4 @@ client = MongoClient('localhost', 27017)
 # mongoDB는 27017 포트로 돌아갑니다.
 db = client.testDB
 
-db.typlayerstat.drop()
+db.myteam.drop()
