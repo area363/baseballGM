@@ -5,4 +5,16 @@ client = MongoClient('localhost', 27017)
 # mongoDB는 27017 포트로 돌아갑니다.
 db = client.testDB
 
-db.myteam.drop()
+
+# db["두산"].drop()
+# db["롯데"].drop()
+# db["삼성"].drop()
+# db["키움"].drop()
+# db["한화"].drop()
+# db["KIA"].drop()
+# db["KT"].drop()
+# db["LG"].drop()
+# db["NC"].drop()
+# db["SK"].drop()
+
+db.vskbo.drop()

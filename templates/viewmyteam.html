@@ -81,6 +81,21 @@
       $('#player-box').append(card);
     }
 
+    function finalize_team(){
+
+      $.ajax({
+        type: "POST",
+        url: "/api/finalteam",
+        data: {},
+        success: function (response) {
+          if (response['result'] == 'success') {
+            // 2. '삭제 완료! 안녕!' 얼럿을 띄웁니다.
+            alert("finalized!")
+            // 3. 변경된 정보를 반영하기 위해 새로고침합니다.
+          }
+        }
+      });
+    }
 
 
   </script>
@@ -100,7 +115,7 @@
   
         </h2>
         <a href="./selectmyteam" class="primary-btn"><button type="button" class="btn btn-primary">팀 조정하기</button></a>
-        <a href="./vskbo" class="primary-btn"><button type="button" class="btn btn-primary">2019 KBO 리그과 겨루기</button></a>
+        <a href="./vskbo" class="primary-btn"><button type="button" onclick = "finalize_team()" class="btn btn-primary">2019 KBO 리그과 겨루기</button></a>
       </div>
     </div>
   <div class="container">

@@ -58,10 +58,15 @@ def crawler(teams):
         if soup.select_one('#cphContents_cphContents_cphContents_playerProfile_lblPosition') is not None:
             position = soup.select_one('#cphContents_cphContents_cphContents_playerProfile_lblPosition').text
 
+        team_logolink = ""
+        if soup.select_one('span.emb > img') is not None:
+            team_logo = soup.select_one('span.emb > img')
+            team_logolink = "https:" + team_logo['src']
+
         # 선수 스탯 출력
         if name is not None:
             print(rank, name,team,game, "AVG:", avg, "RUN:", run, "HIT:", hit, "HR:", hr, "RBI:", rbi,
-                  "Link:", href, "Photo:", photo_link, "Position:", position)
+                  "Link:", href, "Photo:", photo_link, "Position:", position, "Logo", team_logolink)
             # 스탯 모으기
             data = {
                 'Rank': rank,
@@ -75,7 +80,8 @@ def crawler(teams):
                 'RBI': rbi,
                 'Link': href,
                 'Photo': photo_link,
-                'Position': position
+                'Position': position,
+                'Logo': team_logolink
             }
 
             # db에 입력하기
