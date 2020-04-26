@@ -5,7 +5,11 @@ client = MongoClient('localhost', 27017)
 # mongoDB는 27017 포트로 돌아갑니다.
 db = client.testDB
 
-db.vskbo.delete_one({"Team": "스파르타"})
+teams = list(db.vskbo.find({}, {"_id" : 0}).sort('rank',-1))
+
+print(teams)
+
+# db.vskbo.delete_one({"Team": "스파르타"})
 
 # def calcTeamStat(teams):
 

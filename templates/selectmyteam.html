@@ -2,200 +2,64 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KBO Baseball GM<</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KBO Baseball GM</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
 
-  <!-- Boostrap -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/selectmyteam.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
 
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
-  <style>
-    .title  {
-      color: white;
-    }
-    .subtitle  {
-      color: white;
-    }
-    .hero-body{
-      background-color: rgb(179, 26, 26);
-      padding: 50px;
-    }
-    .make-center {
-      text-align: center;
-    }
-
-    .star-list {
-      width: 500px;
-      margin: 20px auto 0 auto;
-    }
-
-    .star-name {
-      display: inline-block;
-    }
-
-    .star-name:hover {
-      text-decoration: underline;
-    }
-ß
-    .card {
-      margin-bottom: 15px;
-    }
-  </style>
-  <script>
-    $(document).ready(function () {
-      // index.html 로드가 완료되면 자동으로 show_star() 함수를 호출합니다.
-      show_player();
-    });
-
-    function show_player() {
-      $.ajax({
-        type: 'GET',
-        url: '/api/list',
-        data: {},
-        success: function (response) {
-          if (response['result'] == 'success') {
-            let msg = response['msg'];
-            for (let i = 0; i < response['data'].length; i++) {
-              const player = response['data'][i];
-              make_card(player);
-            }
-          }
-
-        }
-      });
-    }
-    function make_card(player) {
-      const card =
-        `<tr>
-          <th scope="row">${player.Rank}</th>
-          <td>${player.Name}</td>
-          <td><img height=70px width=50px src="${player.Photo}"></td>
-          <td>${player.Team}</td>
-          <td>${player.Position.slice(0,3)}</td>
-          <td>${player.Game}</td>
-          <td>${player.Avg}</td>
-          <td>${player.Hit}</td>
-          <td>${player.Hr}</td>
-          <td>${player.Run}</td>
-          <td>${player.RBI}</td>
-          <td><button type="button" class="btn btn-primary" onclick="pick_player('${player.Name}', '${player.Position}')">선택</button></td>
-          <td><button type="button" class="btn btn-primary" onclick="delete_player('${player.Name}', '${player.Position}')">취소</button></td>
-        </tr>`;
-      $('#player-box').append(card);
-    }
-
-    function pick_player(name, position) {
-      // 1. 서버에 1) POST 방식으로, 2) /api/like 라는 url에, 3) name_give라는 이름으로 name을 전달합니다.
-      // 참고) POST 방식이므로 data: {'name_give': name} 과 같은 양식이 되어야합니다!
-
-      if (position == ""){
-        alert('올해 KBO 명단에 없습니다!');
-        return;
-      }
-      $.ajax({
-        type: "POST",
-        url: "/api/pick",
-        data: { 'name_give': name },
-        success: function (response) {
-          if (response['result'] == 'success') {
-            // 2. '좋아요 완료!' 얼럿을 띄웁니다.
-            alert('선택완료! 현재 팀원수: '+ response['count']);
-            // 3. 변경된 정보를 반영하기 위해 새로고침합니다.
-            return;
-            
-          }
-          if (response['result'] == 'DNE'){
-            alert ('올해 KBO 명단에 없습니다!');
-            return;
-          }
-          if (response['result'] === 'morethan8'){
-            alert('이미 8명을 선택했습니다!');
-            return;
-          }
-          if (response['result'] === 'fail')  {
-            alert ('이미 선택했습니다!');
-            return;
-          }
-        }
-      });
-          console.log(name);}
-
-    function delete_player(name, position) {
-      // 1. 서버에 1) POST 방식으로, 2) /api/delete 라는 url에, 3) name_give라는 이름으로 name을 전달합니다.
-      // 참고) POST 방식이므로 data: {'name_give': name} 과 같은 양식이 되어야합니다!
-      if (position == ""){
-        alert('올해 KBO 명단에 없습니다!');
-        return;
-      }
-      $.ajax({
-        type: "POST",
-        url: "/api/delete",
-        data: { 'name_give': name },
-        success: function (response) {
-          if (response['result'] == 'success') {
-            // 2. '삭제 완료! 안녕!' 얼럿을 띄웁니다.
-            alert('취소완료! 현재 팀원수: '+ response['count'])
-            // 3. 변경된 정보를 반영하기 위해 새로고침합니다.
-          }
-
-          else if (response['result'] == 'DNE'){
-            alert ('내 팀 명단에 없습니다!')
-          }
-        }
-      });
-    }
-
-  </script>
+    <!-- Javascript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/selectmyteam.js') }}"></script>
 </head>
 
 <body>
-  <section class="hero is-warning">
-    <div class="hero-body">
-      <div class="container make-center">
-        <h1 class="title">
-          내 팀을 선택하자
-        </h1>
-        <h2 class="subtitle">
-          타자 8명을 선택하세요
-        </h2>
-        <h2 class="subtitle">
-          KBO 타자 2018년 성적
-        </h2>
-        <a href="./" class="primary-btn"><button type="button" class="btn btn-primary">뒤로</button></a>
-        <a href="./viewmyteam" class="primary-btn"><button type="button" class="btn btn-primary">내 팀 보기</button></a>
-      </div>
-    </div>
-  </section>
-  <div class="container">
+    <section class="hero is-warning">
+        <div class="hero-body">
+            <div class="container make-center">
+                <h1 class="title">
+                    내 팀을 선택하자!
+                </h1>
+                <h2 class="subtitle">
+                    타자 8명을 선택하세요
+                </h2>
+                <h2 class="subtitle">
+                    KBO 타자 2018년 성적
+                </h2>
+                <a href="./" class="primary-btn"><button type="button" class="btn btn-primary">뒤로</button></a>
+                <button type="button" class="btn btn-primary" onclick="checkNumber()">내 팀 보기</button>
+            </div>
+        </div>
+    </section>
+    <div class="container">
         <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">이름</th>
-              <th scope="col">사진</th>
-              <th scope="col">팀</th>
-              <th scope="col">포지션</th>
-              <th scope="col">경기수</th>
-              <th scope="col">타율</th>
-              <th scope="col">안타</th>
-              <th scope="col">홈런</th>
-              <th scope="col">득점</th>
-              <th scope="col">타점</th>
-              <th scope="col">선택</th>
-              <th scope="col">취소</th>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">이름</th>
+                    <th scope="col">사진</th>
+                    <th scope="col">팀</th>
+                    <th scope="col">포지션</th>
+                    <th scope="col">경기수</th>
+                    <th scope="col">타율</th>
+                    <th scope="col">안타</th>
+                    <th scope="col">홈런</th>
+                    <th scope="col">득점</th>
+                    <th scope="col">타점</th>
+                    <th scope="col">선택</th>
+                    <th scope="col">취소</th>
 
-            </tr>
-          </thead>
-          <tbody id="player-box">
-          </tbody>
+                </tr>
+            </thead>
+            <tbody id="player-box">
+            </tbody>
         </table>
-</div>
+    </div>
 </body>
 
 </html>

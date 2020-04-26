@@ -33,6 +33,13 @@ def player_list():
     players = list(db.lyplayerstat.find({}, {"_id" : 0}).sort('rank',-1))
     return jsonify({'result': 'success','msg':'list 연결되었습니다!', 'data' : players})
 
+@app.route('/api/check', methods=['GET'])
+def player_number():
+
+    if db.myteam.count_documents({}) < 8:
+        return jsonify({'result': 'lessthan8'})
+    else:
+        return jsonify({'result': 'success'})
 
 @app.route('/api/pick', methods=['POST'])
 def player_pick():

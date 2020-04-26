@@ -1,0 +1,33 @@
+.title {
+    color: white;
+}
+
+.subtitle {
+    color: white;
+}
+
+.hero-body {
+    background-color: rgb(179, 26, 26);
+    padding: 50px;
+}
+
+.make-center {
+    text-align: center;
+}
+
+.star-list {
+    width: 500px;
+    margin: 20px auto 0 auto;
+}
+
+.star-name {
+    display: inline-block;
+}
+
+.star-name:hover {
+    text-decoration: underline;
+}
+
+.card {
+    margin-bottom: 15px;
+}

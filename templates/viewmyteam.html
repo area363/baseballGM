@@ -2,137 +2,55 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KBO Baseball GM<</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KBO Baseball GM</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
 
-  <!-- Boostrap -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/viewmyteam.css') }}">
 
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
-  <style>
-    .title  {
-      color: white;
-    }
-    .subtitle  {
-      color: white;
-    }
-    .hero-body{
-      background-color: rgb(179, 26, 26);
-      padding: 50px;
-    }
-    .make-center {
-      text-align: center;
-    }
+    <!-- Javascript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/viewmyteam.js') }}"></script>
 
-    .star-list {
-      width: 500px;
-      margin: 20px auto 0 auto;
-    }
-
-    .star-name {
-      display: inline-block;
-    }
-
-    .star-name:hover {
-      text-decoration: underline;
-    }
-ß
-    .card {
-      margin-bottom: 15px;
-    }
-  </style>
-  <script>
-    $(document).ready(function () {
-      show_player();
-    });
-
-    function show_player() {
-      $.ajax({
-        type: 'GET',
-        url: '/api/myteamlist',
-        data: {},
-        success: function (response) {
-          if (response['result'] == 'success') {
-            let msg = response['msg'];
-            for (let i = 0; i < response['data'].length; i++) {
-              const player = response['data'][i];
-              make_card(player, i+1);
-            }
-          }
-
-        }
-      });
-    }
-    function make_card(player, number) {
-      const card =
-        `<tr>
-          <th scope="row">${number}</th>
-          <td>${player.Name}</td>
-          <td><img height=70px width=50px src="${player.Photo}"></td>
-          <td>${player.Team}</td>
-          <td>${player.Position.slice(0,3)}</td>
-        </tr>`;
-      $('#player-box').append(card);
-    }
-
-    function finalize_team(){
-
-      $.ajax({
-        type: "POST",
-        url: "/api/finalteam",
-        data: {},
-        success: function (response) {
-          if (response['result'] == 'success') {
-            // 2. '삭제 완료! 안녕!' 얼럿을 띄웁니다.
-            alert("finalized!")
-            // 3. 변경된 정보를 반영하기 위해 새로고침합니다.
-          }
-        }
-      });
-    }
-
-
-  </script>
 </head>
 
 <body>
-  <section class="hero is-warning">
-    <div class="hero-body">
-      <div class="container make-center">
-        <h1 class="title">
-          나만의 KBO 팀
-        </h1>
-        <h2 class="subtitle">
-         
-        </h2>
-        <h2 class="subtitle">
-  
-        </h2>
-        <a href="./selectmyteam" class="primary-btn"><button type="button" class="btn btn-primary">팀 조정하기</button></a>
-        <a href="./vskbo" class="primary-btn"><button type="button" onclick = "finalize_team()" class="btn btn-primary">2019 KBO 리그과 겨루기</button></a>
-      </div>
-    </div>
-  <div class="container">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">이름</th>
-              <th scope="col">사진</th>
-              <th scope="col">팀</th>
-              <th scope="col">포지션</th>
-            </tr>
-          </thead>
-          <tbody id="player-box">
-          </tbody>
-        </table>
-</div>
+    <section class="hero is-warning">
+        <div class="hero-body">
+            <div class="container make-center">
+                <h1 class="title">
+                    나만의 KBO 팀
+                </h1>
+                <h2 class="subtitle">
+
+                </h2>
+                <h2 class="subtitle">
+
+                </h2>
+                <a href="./selectmyteam" class="primary-btn"><button type="button" class="btn btn-primary">팀 조정하기</button></a>
+                <button type="button" onclick="finalize_team()" class="btn btn-primary">2019 KBO 리그과 겨루기</button>
+            </div>
+        </div>
+        <div class="container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">이름</th>
+                        <th scope="col">사진</th>
+                        <th scope="col">팀</th>
+                        <th scope="col">포지션</th>
+                    </tr>
+                </thead>
+                <tbody id="player-box">
+                </tbody>
+            </table>
+        </div>
 </body>
 
 </html>

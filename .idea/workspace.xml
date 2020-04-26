@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb425b53-bedd-46fe-832c-fea682c50cb2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clearDB.py" beforeDir="false" afterPath="$PROJECT_DIR$/clearDB.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/selectmyteam.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/selectmyteam.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/viewmyteam.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/viewmyteam.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/vskbo.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/vskbo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/testing.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,7 +24,7 @@
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
-              <caret line="41" selection-start-line="41" selection-end-line="42" />
+              <caret line="48" selection-start-line="48" selection-end-line="49" />
               <folding>
                 <element signature="e#24#55#0" expanded="true" />
               </folding>
@@ -276,6 +277,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1433" y="164" width="1280" height="777" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2915012" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -394,7 +396,7 @@
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
-          <caret line="41" selection-start-line="41" selection-end-line="42" />
+          <caret line="48" selection-start-line="48" selection-end-line="49" />
           <folding>
             <element signature="e#24#55#0" expanded="true" />
           </folding>

@@ -17,4 +17,4 @@ db = client.testDB
 # db["NC"].drop()
 # db["SK"].drop()
 
-db.vskbo.drop()
+db.vskbo.delete_many({ "Team": "스파르타" })
