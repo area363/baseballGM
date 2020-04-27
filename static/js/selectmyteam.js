@@ -1,6 +1,7 @@
 $(document).ready(function() {
     // index.html 로드가 완료되면 자동으로 show_player() 함수 호출
     show_player();
+
 });
 
 function show_player() {
@@ -19,6 +20,7 @@ function show_player() {
 
         }
     });
+
 }
 
 // 선수 리스트를 만든다 
