@@ -5,12 +5,9 @@ client = MongoClient('localhost', 27017)
 # mongoDB는 27017 포트로 돌아갑니다.
 db = client.testDB
 
-def calcTeamStat(teams):
+def calcTeamStat(team):
 
-    team = teams
-    # players = list(db[team].find({ 'Rank': { '$lt': 9 } }, {'_id' : 0}))
     players = list(db[team].find({}).limit(8))
-
 
     games = 0
     avg = 0

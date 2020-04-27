@@ -12,7 +12,7 @@ db = client.testDB
 driver = webdriver.Chrome('./chromedriver')
 
 # KBO 2018년도 선수스탯 크롤링 함수
-def crawler(page, rank):
+def crawler2018(page, rank):
     # URL 가져오기
     driver.get('https://www.koreabaseball.com/Record/Player/HitterBasic/Basic1.aspx')
     # 스탯 옵션에서 2018년도 성적 선택하기
@@ -84,6 +84,6 @@ def crawler(page, rank):
 
 # 50경기 이상 플레이한 선수 명단 크롤링
 for x in range (1,6):
-    crawler(x, (x-1)*30+1)
+    crawler2018(x, (x-1)*30+1)
 
 driver.close()
