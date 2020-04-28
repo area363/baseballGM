@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb425b53-bedd-46fe-832c-fea682c50cb2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/2018playerstat.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2019playerstat.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2019teamresult.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/clearDB.py" beforeDir="false" afterPath="$PROJECT_DIR$/clearDB.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dbSetUp.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dbtest.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chromedriver" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/selectmyteam.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/selectmyteam.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/viewmyteam.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/viewmyteam.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/vskbo.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/vskbo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/selectmyteam.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/selectmyteam.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/viewmyteam.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/viewmyteam.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/vskbo.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/vskbo.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,8 +22,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="48" selection-start-line="48" selection-end-line="49" />
+            <state relative-caret-position="45">
+              <caret line="50" selection-start-line="50" selection-end-line="50" />
               <folding>
                 <element signature="e#24#55#0" expanded="true" />
               </folding>
@@ -82,8 +81,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="123" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1433" />
+    <option name="y" value="164" />
     <option name="width" value="1280" />
     <option name="height" value="777" />
   </component>
@@ -275,7 +275,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="123" width="1280" height="777" extended-state="6" />
+    <frame x="1433" y="164" width="1280" height="777" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2915012" />
@@ -394,8 +394,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="48" selection-start-line="48" selection-end-line="49" />
+        <state relative-caret-position="45">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
           <folding>
             <element signature="e#24#55#0" expanded="true" />
           </folding>

@@ -1,10 +1,17 @@
+var clientid = Math.floor(Math.random() * 100000000000);
+const id = [];
+id.push(clientid);
+console.log(id);
+localStorage.setItem("id", id);
+
 $(document).ready(function() {
     // index.html 로드가 완료되면 자동으로 show_player() 함수 호출
-    show_player();
 
+    show_player(clientid);
+    make_button(clientid);
 });
 
-function show_player() {
+function show_player(clientid) {
     $.ajax({
         type: 'GET',
         url: '/api/list',
@@ -14,7 +21,9 @@ function show_player() {
                 let msg = response['msg'];
                 for (let i = 0; i < response['data'].length; i++) {
                     const player = response['data'][i];
-                    make_card(player);
+                    make_card(player, clientid);
+
+
                 }
             }
 
@@ -23,8 +32,13 @@ function show_player() {
 
 }
 
+function make_button(clientid) {
+    console.log(clientid);
+    const button = `<button type="button" class="btn btn-primary" onclick="checkNumber('${clientid}')">내 팀 보기</button>`;
+    $('#button').append(button);
+}
 // 선수 리스트를 만든다 
-function make_card(player) {
+function make_card(player, clientid) {
     const card =
         `<tr>
     <th scope="row">${player.Rank}</th>
@@ -38,16 +52,17 @@ function make_card(player) {
     <td>${player.Hr}</td>
     <td>${player.Run}</td>
     <td>${player.RBI}</td>
-    <td><button type="button" class="btn btn-primary" onclick="pick_player('${player.Name}', '${player.Position}')">선택</button></td>
-    <td><button type="button" class="btn btn-primary" onclick="delete_player('${player.Name}', '${player.Position}')">취소</button></td>
+    <td><button type="button" class="btn btn-primary" onclick="pick_player('${player.Name}', '${player.Position}', '${clientid}')">선택</button></td>
+    <td><button type="button" class="btn btn-primary" onclick="delete_player('${player.Name}', '${player.Position}', '${clientid}')">취소</button></td>
   </tr>`;
     $('#player-box').append(card);
 }
 
 //선수를 선택한다.
-function pick_player(name, position) {
+function pick_player(name, position, clientid) {
 
     // 만약 2018년도 성적에 포지션이 없다면 2019년도 로스터에 없다는 뜻이므로 alert를 띄운다.
+    console.log(clientid)
     if (position == "") {
         alert('올해 KBO 명단에 없습니다!');
         return;
@@ -57,7 +72,8 @@ function pick_player(name, position) {
         type: "POST",
         url: "/api/pick",
         data: {
-            'name_give': name
+            'name_give': name,
+            'clientid': clientid
         },
         success: function(response) {
             // 선수 선택 & 업데이트 성공할 경우
@@ -92,13 +108,14 @@ function pick_player(name, position) {
 }
 
 // 선수를 삭제한다
-function delete_player(name, position) {
+function delete_player(name, position, clientid) {
 
     $.ajax({
         type: "POST",
         url: "/api/delete",
         data: {
-            'name_give': name
+            'name_give': name,
+            'clientid': clientid
         },
         success: function(response) {
             // 선수 삭제 성공시, 취소완료와 현재 팀원 수를 알린다.
@@ -113,12 +130,11 @@ function delete_player(name, position) {
     });
 }
 
-function checkNumber() {
-
+function checkNumber(clientid) {
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: "/api/check",
-        data: {},
+        data: { 'clientid': clientid },
         success: function(response) {
             // 선수 삭제 성공시, 취소완료와 현재 팀원 수를 알린다.
             if (response['result'] == 'success') {

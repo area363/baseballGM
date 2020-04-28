@@ -1,19 +1,24 @@
+var id = localStorage.getItem("id");
+console.log(id);
+
 $(document).ready(function() {
-    show_player();
+    show_myplayer(id);
+    make_button(id);
+    alert("당신의 고유ID: " + id);
 });
 
 // 내가 선택한 선수 명단 가져오기
-function show_player() {
+function show_myplayer(id) {
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: '/api/myteamlist',
-        data: {},
+        data: { "id": id },
         success: function(response) {
             if (response['result'] == 'success') {
                 let msg = response['msg'];
                 for (let i = 0; i < response['data'].length; i++) {
                     const player = response['data'][i];
-                    make_card(player, i + 1);
+                    make_list(player, i + 1);
                 }
             }
 
@@ -21,8 +26,14 @@ function show_player() {
     });
 }
 
+function make_button(id) {
+    console.log(id);
+    const button = `<button type="button" onclick="finalize_team('${id}')" class="btn btn-primary">2019 KBO 리그과 겨루기</button>`;
+    $('#button').append(button);
+}
+
 // 내 선수 리스트 만들기
-function make_card(player, number) {
+function make_list(player, number) {
     const card =
         `<tr>
             <th scope="row">${number}</th>
@@ -35,11 +46,11 @@ function make_card(player, number) {
 }
 
 // 내 선수단 확정해서 데이터베이스에 넣기 
-function finalize_team() {
+function finalize_team(id) {
     $.ajax({
         type: "POST",
         url: "/api/finalteam",
-        data: {},
+        data: { "id": id },
         success: function(response) {
             if (response['result'] == 'success') {
 

@@ -1,10 +1,14 @@
+var id = localStorage.getItem("id");
+console.log(id);
+
 $(document).ready(function() {
     // 2019년 성적 결과 호출
-    show_result();
+    show_result(id);
+    make_button(id)
 });
 
 // 2019년 성적 결과 계산하여 점수 부여한 후 총점을 바탕으로 순위 계산하여 리스트 만들기
-function show_result() {
+function show_result(id) {
     $.ajax({
         type: 'GET',
         url: '/api/result',
@@ -139,7 +143,16 @@ function show_result() {
             }
         }
     });
+
+    pre_delete(id);
 }
+
+function make_button(id) {
+    console.log(id);
+    const button = `<button type="button" class="btn btn-primary" onclick="delete_allplayer('${id}')">다시하기</button>`;
+    $('#button').append(button);
+}
+
 
 // 팀 성적 결과를 리스트로 만든다
 function make_card(team, rank) {
@@ -158,17 +171,29 @@ function make_card(team, rank) {
     $('#player-box').append(card);
 }
 
+
+function pre_delete(id) {
+    $.ajax({
+        type: "POST",
+        url: "/api/deleteall",
+        data: { "id": id },
+        success: function(response) {
+            if (response['result'] == 'success') {;
+            }
+        }
+    });
+}
 // 한 게임에 입력된 내 팀 명단을 삭제 
-function delete_allplayer() {
+function delete_allplayer(id) {
 
     $.ajax({
         type: "POST",
         url: "/api/deleteall",
-        data: {},
+        data: { "id": id },
         success: function(response) {
             if (response['result'] == 'success') {
-                alert('팀 삭제!')
-                alert(response['count'])
+                alert('팀 삭제!');
+                window.location.href = "./selectmyteam";
             }
         }
     });
