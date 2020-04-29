@@ -18,6 +18,11 @@ function show_result(id) {
                 console.log(response);
 
                 // 팀 간 스탯 순위를 정하기 위한 변수
+                var avg1 = [];
+                var run1 = [];
+                var hit1 = [];
+                var hr1 = [];
+                var rbi1 = [];
                 var avg = [];
                 var run = [];
                 var hit = [];
@@ -25,30 +30,99 @@ function show_result(id) {
                 var rbi = [];
                 var teams = [];
                 teams = [];
-
                 // 빈 변수에 해당 데이터 입력하기 
                 for (let i = 0; i < response['data'].length; i++) {
 
                     const team = response['data'][i];
                     teams.push(team);
-                    console.log(response['data'][i]);
-                    avg.push(response['data'][i]["Avg"]);
-                    run.push(response['data'][i]["Run"]);
-                    hit.push(response['data'][i]["Hit"]);
-                    hr.push(response['data'][i]["Hr"]);
-                    rbi.push(response['data'][i]["RBI"]);
+                    avg1.push(response['data'][i]["Avg"]);
+                    run1.push(response['data'][i]["Run"]);
+                    hit1.push(response['data'][i]["Hit"]);
+                    hr1.push(response['data'][i]["Hr"]);
+                    rbi1.push(response['data'][i]["RBI"]);
+                }
+                console.log(teams);
+                function getDuplicateArrayElements(arr){
+                    var sorted_arr = arr.slice().sort();
+                    var results = [];
+                    for (var i = 0; i < sorted_arr.length - 1; i++) {
+                        if (sorted_arr[i + 1] === sorted_arr[i]) {
+                            results.push(sorted_arr[i]);
+                        }
+                    }
+                    return results;
+                }
+                
+                var duplicaterunStat= getDuplicateArrayElements(run1);
+                var duplicatehitStat= getDuplicateArrayElements(hit1);
+                var duplicatehrStat= getDuplicateArrayElements(hr1);
+                var duplicaterbiStat= getDuplicateArrayElements(rbi1);
+
+                console.log(duplicaterunStat);
+                if (duplicaterunStat.length !== 0){
+
+                    function finalStat(team) {
+                        return team.Run === duplicaterunStat[0];
+                    }
+
+                    // 해당 타율의 팀 index 저장
+                    var index = teams.findIndex(finalStat);
+                    console.log(teams[index]);
+                    teams[index]["Run"] +=1;
+                }
+
+                if (duplicatehitStat.length !== 0){
+                    function finalStat(team) {
+                        return team.Hit === duplicatehitStat[0];
+                    }
+
+                    // 해당 타율의 팀 index 저장
+                    var index = teams.findIndex(finalStat);
+                    teams[index]["Hit"] +=1;
+                }
+
+                if (duplicatehrStat.length !== 0){
+                    function finalStat(team) {
+                        return team.Hr === duplicatehrStat[0];
+                    }
+
+                    // 해당 타율의 팀 index 저장
+                    var index = teams.findIndex(finalStat);
+                    teams[index]["Hr"] +=1;
+                }
+
+                if (duplicaterbiStat.length !== 0){
+                    function finalStat(team) {
+                        return team.RBI === duplicaterbiStat[0];
+                    }
+
+                    // 해당 타율의 팀 index 저장
+                    var index = teams.findIndex(finalStat);
+                    teams[index]["RBI"] +=1;
+                }
+
+                for (var i = 0; i<teams.length; i++){
+                    avg.push(teams[i]["Avg"]);
+                    run.push(teams[i]["Run"]);
+                    hit.push(teams[i]["Hit"]);
+                    hr.push(teams[i]["Hr"]);
+                    rbi.push(teams[i]["RBI"]);
                 }
 
                 // 각 스탯을 올라가는 순서로 정렬한다.
                 avg.sort();
-                run.sort();
+                run.sort(function(a, b) {
+                    return a - b
+                });
                 hit.sort(function(a, b) {
                     return a - b
                 });
                 hr.sort(function(a, b) {
                     return a - b
                 });
-                rbi.sort();
+                rbi.sort(function(a, b) {
+                    return a - b
+                });
 
                 // 최하위 타율부터 최상위 타율까지 1점부터 11점까지 부여 
                 var j = 1;
@@ -143,8 +217,7 @@ function show_result(id) {
             }
         }
     });
-
-    pre_delete(id);
+    setTimeout(pre_delete(id), 1000);
 }
 
 function make_button(id) {

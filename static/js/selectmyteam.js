@@ -78,25 +78,19 @@ function pick_player(name, position, clientid) {
         success: function(response) {
             // 선수 선택 & 업데이트 성공할 경우
             if (response['result'] == 'success') {
-
                 alert('선택완료! 현재 팀원수: ' + response['count']);
-
                 return;
-
             }
-
             // 선수가 2019년 명단에 없을 경우
             if (response['result'] == 'DNE') {
                 alert('올해 KBO 명단에 없습니다!');
                 return;
             }
-
             // 선수 8명을 이미 선택했을 경우 
             if (response['result'] === 'morethan8') {
                 alert('이미 8명을 선택했습니다!');
                 return;
             }
-
             // 이미 선택한 선수일 경우 
             if (response['result'] === 'fail') {
                 alert('이미 선택했습니다!');
