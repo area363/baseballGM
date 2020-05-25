@@ -8,12 +8,14 @@ client = MongoClient('localhost', 27017)
 # mongoDB는 27017 포트로 돌아갑니다.
 db = client.testDB
 
+options = webdriver.ChromeOptions()
+options.add_argument('headless')
 # 드라이버 열기
-driver = webdriver.Chrome('./chromedriver')
+driver = webdriver.Chrome('./chromedriver', chrome_options=options)
 
 # KBO 2018년도 선수스탯 크롤링 함수
-def crawler(teams):
-    collection = db[teams]
+def crawler(teams, teaminEng):
+    collection = db[teaminEng]
     # URL 가져오기
     driver.get('https://www.koreabaseball.com/Record/Player/HitterBasic/Basic1.aspx')
     # 스탯 옵션에서 팀 선택하
@@ -33,7 +35,7 @@ def crawler(teams):
     # tr 태그 내 선수 스탯 출력하기
     for player in players:
         name = player.select_one('td > a').text  # 이름
-        team = player.find_all('td')[2].text
+        team = teaminEng
         href = "https://www.koreabaseball.com" + player.select_one('td > a')['href']  # 선수 개별 페이지 링크
         game = player.find('td', {'data-id': 'GAME_CN'}).text # 경기
         avg = player.find('td', {'data-id': 'HRA_RT'}).text  # 타율
@@ -89,16 +91,16 @@ def crawler(teams):
             rank += 1
 
 # 각 KBO팀 2019년 선수 성적 크롤
-crawler("두산")
-crawler("롯데")
-crawler("삼성")
-crawler("키움")
-crawler("한화")
-crawler("KIA")
-crawler("KT")
-crawler("LG")
-crawler("NC")
-crawler("SK")
+crawler("두산", "Doosan Bears")
+crawler("롯데", "Lotte Giants")
+crawler("삼성", "Samsung Lions")
+crawler("키움", "Kiwoom Heroes")
+crawler("한화", "Hanwha Eagles")
+crawler("KIA", "KIA Tigers")
+crawler("KT", "KT Wiz")
+crawler("LG", "LG Twins")
+crawler("NC", "NC Dinos")
+crawler("SK", "SK Wyverns")
 
 
 driver.close()

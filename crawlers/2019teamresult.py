@@ -46,16 +46,15 @@ def calcTeamStat(team):
     db.vskbo.insert_one(data)
 
 
-calcTeamStat("두산")
-calcTeamStat("롯데")
-calcTeamStat("삼성")
-calcTeamStat("키움")
-calcTeamStat("한화")
-calcTeamStat("KIA")
-calcTeamStat("KT")
-calcTeamStat("LG")
-calcTeamStat("NC")
-calcTeamStat("SK")
-
+calcTeamStat("Doosan Bears")
+calcTeamStat("Lotte Giants")
+calcTeamStat("Samsung Lions")
+calcTeamStat("Kiwoom Heroes")
+calcTeamStat("Hanwha Eagles")
+calcTeamStat("KIA Tigers")
+calcTeamStat("KT Wiz")
+calcTeamStat("LG Twins")
+calcTeamStat("NC Dinos")
+calcTeamStat("SK Wyverns")
 
 

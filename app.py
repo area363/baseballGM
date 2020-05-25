@@ -84,7 +84,7 @@ def player_delete():
 def players_delete():
     # 1. 클라이언트가 전달한 name_give를 name_receive 변수에 넣습니다.
     client_id = request.form['id']
-    db.vskbo.delete_one({"Team": "사용자ID: " + client_id})
+    db.vskbo.delete_one({"Team": "HR Hackers (ID: " + client_id + ")"})
     return jsonify({'result': 'success'})
 
 @app.route('/api/finalteam', methods=['POST'])
@@ -101,7 +101,7 @@ def team_final():
     hit = 0
     hr = 0
     rbi = 0
-    logo = "https://image.rocketpunch.com/company/103338/spartacodingclub_logo_1584940180.jpg?s=400x400&t=inside"
+    logo = "https://images.squarespace-cdn.com/content/522a22cbe4b04681b0bff826/1478280799815-SNJGJ4VICZJLF7JWZR09/hrhq-avatar.png?content-type=image%2Fpng"
 
     for i in range(0, 8):
         games += int(players[i]['Game'])
@@ -116,7 +116,7 @@ def team_final():
 
     data = {
 
-        'Team': "사용자ID: " + client_id,
+        'Team': "HR Hackers (ID: " + client_id + ")",
         'Game': games,
         'Avg': avg,
         'Run': run,

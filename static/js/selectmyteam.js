@@ -34,7 +34,7 @@ function show_player(clientid) {
 
 function make_button(clientid) {
     console.log(clientid);
-    const button = `<button type="button" class="btn btn-primary" onclick="checkNumber('${clientid}')">내 팀 보기</button>`;
+    const button = `<button type="button" class="btn btn-primary" onclick="checkNumber('${clientid}')">View My Team</button>`;
     $('#button').append(button);
 }
 // 선수 리스트를 만든다 
@@ -52,8 +52,8 @@ function make_card(player, clientid) {
     <td>${player.Hr}</td>
     <td>${player.Run}</td>
     <td>${player.RBI}</td>
-    <td><button type="button" class="btn btn-primary" onclick="pick_player('${player.Name}', '${player.Position}', '${clientid}')">선택</button></td>
-    <td><button type="button" class="btn btn-primary" onclick="delete_player('${player.Name}', '${player.Position}', '${clientid}')">취소</button></td>
+    <td><button type="button" class="btn btn-primary" onclick="pick_player('${player.Name}', '${player.Position}', '${clientid}')">Select</button></td>
+    <td><button type="button" class="btn btn-primary" onclick="delete_player('${player.Name}', '${player.Position}', '${clientid}')">Cancel</button></td>
   </tr>`;
     $('#player-box').append(card);
 }
@@ -64,7 +64,7 @@ function pick_player(name, position, clientid) {
     // 만약 2018년도 성적에 포지션이 없다면 2019년도 로스터에 없다는 뜻이므로 alert를 띄운다.
     console.log(clientid)
     if (position == "") {
-        alert('올해 KBO 명단에 없습니다!');
+        alert('This player is not on 2019 KBO Roster!');
         return;
     }
 
@@ -78,22 +78,22 @@ function pick_player(name, position, clientid) {
         success: function(response) {
             // 선수 선택 & 업데이트 성공할 경우
             if (response['result'] == 'success') {
-                alert('선택완료! 현재 팀원수: ' + response['count']);
+                alert('Picked! Number of players on your team: ' + response['count']);
                 return;
             }
             // 선수가 2019년 명단에 없을 경우
             if (response['result'] == 'DNE') {
-                alert('올해 KBO 명단에 없습니다!');
+                alert('This player is not on 2019 KBO Roster!');
                 return;
             }
             // 선수 8명을 이미 선택했을 경우 
             if (response['result'] === 'morethan8') {
-                alert('이미 8명을 선택했습니다!');
+                alert('You\'ve already picked 8 players!');
                 return;
             }
             // 이미 선택한 선수일 경우 
             if (response['result'] === 'fail') {
-                alert('이미 선택했습니다!');
+                alert('You\'ve already picked this player!');
                 return;
             }
         }
@@ -114,11 +114,11 @@ function delete_player(name, position, clientid) {
         success: function(response) {
             // 선수 삭제 성공시, 취소완료와 현재 팀원 수를 알린다.
             if (response['result'] == 'success') {
-                alert('취소완료! 현재 팀원수: ' + response['count'])
+                alert('Deleted From Roster! Number of players on your team: ' + response['count'])
 
                 // 선택 선수 명단에 없을 경우 명단에 없음을 알린다/
             } else if (response['result'] == 'DNE') {
-                alert('내 팀 명단에 없습니다!')
+                alert('This player\'s not on your roster!')
             }
         }
     });
@@ -132,12 +132,12 @@ function checkNumber(clientid) {
         success: function(response) {
             // 선수 삭제 성공시, 취소완료와 현재 팀원 수를 알린다.
             if (response['result'] == 'success') {
-                alert('굿럭!');
+                alert('Good Luck!');
                 window.location.href = "./viewmyteam";
 
                 // 선택 선수 명단에 없을 경우 명단에 없음을 알린다/
             } else if (response['result'] == 'lessthan8') {
-                alert('8명을 선택해야 합니다!');
+                alert('Please pick 8 players!');
             }
         }
     });

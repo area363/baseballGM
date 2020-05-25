@@ -4,7 +4,7 @@ console.log(id);
 $(document).ready(function() {
     show_myplayer(id);
     make_button(id);
-    alert("당신의 고유ID: " + id);
+    alert("Your Instance ID: " + id);
 });
 
 // 내가 선택한 선수 명단 가져오기
@@ -28,7 +28,7 @@ function show_myplayer(id) {
 
 function make_button(id) {
     console.log(id);
-    const button = `<button type="button" onclick="finalize_team('${id}')" class="btn btn-primary">2019 KBO 리그과 겨루기</button>`;
+    const button = `<button type="button" onclick="finalize_team('${id}')" class="btn btn-primary">Battle with 2019 KBO League</button>`;
     $('#button').append(button);
 }
 
@@ -54,7 +54,7 @@ function finalize_team(id) {
         success: function(response) {
             if (response['result'] == 'success') {
 
-                alert("내 선수단 확정!");
+                alert("My Team Complete!");
                 window.location.href = "./vskbo";
 
             }

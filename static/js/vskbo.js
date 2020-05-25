@@ -4,7 +4,7 @@ console.log(id);
 $(document).ready(function() {
     // 2019년 성적 결과 호출
     show_result(id);
-    make_button(id)
+    make_button(id);
 });
 
 // 2019년 성적 결과 계산하여 점수 부여한 후 총점을 바탕으로 순위 계산하여 리스트 만들기
@@ -222,7 +222,7 @@ function show_result(id) {
 
 function make_button(id) {
     console.log(id);
-    const button = `<button type="button" class="btn btn-primary" onclick="delete_allplayer('${id}')">다시하기</button>`;
+    const button = `<button type="button" class="btn btn-primary" onclick="delete_allplayer('${id}')">Play Again!</button>`;
     $('#button').append(button);
 }
 
@@ -265,7 +265,7 @@ function delete_allplayer(id) {
         data: { "id": id },
         success: function(response) {
             if (response['result'] == 'success') {
-                alert('팀 삭제!');
+                alert('Go Make a New Team!');
                 window.location.href = "./selectmyteam";
             }
         }

@@ -7,9 +7,10 @@ from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
 # mongoDB는 27017 포트로 돌아갑니다.
 db = client.testDB
-
+options = webdriver.ChromeOptions()
+options.add_argument('headless')
 # 드라이버 열기
-driver = webdriver.Chrome('./chromedriver')
+driver = webdriver.Chrome('./chromedriver', chrome_options=options)
 
 # KBO 2018년도 선수스탯 크롤링 함수
 def crawler2018(page, rank):
